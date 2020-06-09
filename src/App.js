@@ -35,8 +35,10 @@ class App extends Component {
       box: {},
       route: 'signin',
       isSignedIn: false
-    }
+    };
   }
+
+  
 
   calculateFaceLocation = (data) => {
     const clarifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
@@ -86,8 +88,8 @@ class App extends Component {
           params={particlesOptions}
         />
         <Navigation isSignedIn={isSignedIn} onRouteChange={this.onRouteChange}/>
-        { route === 'home'
-          ? <div>
+        { route === 'home' ? (
+            <div>
               <Logo />
               <Rank />
               <ImageLinkForm 
@@ -99,12 +101,16 @@ class App extends Component {
                 imageUrl={imageUrl}
               />
             </div>
-          : (
-            this.state.route === 'signin'
-            ? <SignIn onRouteChange={this.onRouteChange} />
-            : <Register onRouteChange={this.onRouteChange} />
+          ) : route === 'signin' ? ( 
+              <SignIn 
+                onRouteChange={this.onRouteChange} 
+              />
+            ) : ( 
+              <Register 
+                onRouteChange={this.onRouteChange} 
+              />
             )
-        }
+          }
       </div>
     );
   }
